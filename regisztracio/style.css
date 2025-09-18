@@ -1,0 +1,35 @@
+body{
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(91, 145, 145);
+}
+
+.mainDiv{
+    display: flex;
+    width: 40%;
+    height: 500px;
+    background-color: rgb(173, 236, 236);
+    margin: 0 auto;
+    border: 2px solid rgb(91, 145, 145);
+    border-radius: 9px;
+}
+
+.belso{
+    margin-left: 15rem;
+    padding-top: 20px;
+
+}
+
+h1{
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: black;
+}
+
+
+.inputok{
+    width: 120%;
+    height: 20px;
+    margin-bottom: 30px;
+}
