@@ -1,0 +1,73 @@
+.mainDiv{
+    display: flex;
+    width: 800px;
+    height: 300px;
+    background-color: yellow;
+}
+
+.mainDiv2{
+    width: 800px;
+    height: 300px;
+    background-color: yellow;
+}
+
+.align-center
+{
+    align-items: center;
+}
+
+.align-end
+{
+    align-items:end;
+}
+
+.align{
+    justify-content: center;
+}
+
+.align_balra{
+    justify-content: flex-start;
+
+}
+
+.align_jobbra{
+    justify-content: flex-end;
+
+}
+
+.align_koz
+{
+    padding-top: 12.5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.green{
+    background-color: green;
+    visibility: hidden;
+}
+
+.yellow{
+    background-color: yellow;
+    visibility: hidden;
+}
+
+.purple{
+    background-color: purple;
+    visibility: visible;
+}
+
+.sizes{
+    width: 100px;
+    height: 100px;
+}
+
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    display: inline-block;
+}
