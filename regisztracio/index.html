@@ -11,62 +11,18 @@
     <br>
     <div class="mainDiv">
         <div class="belso">
-             <label for="email">E-mail:</label><br>
-            <input type="text" id="email" class="inputok" placeholder="minta@gmail.com">
-            <p id="emailHiba" class="hiba"></p>
-            
-            <label for="password">Jelszó:</label><br>
-            <input type="password" id="password" class="inputok" placeholder="minta123">
-            <p id="passwordHiba" class="hiba"></p>
-            
-            <label for="password-again">Jelszó megerősítés:</label><br>
-            <input type="password" id="password-again" class="inputok" placeholder="minta123">
-            <p id="passwordAgainHiba" class="hiba"></p>
+            <label for="email">E-mail:</label>
             <br>
-            <button id="btn" type="button" onclick="ellenorzes()">Küldés</button>
+            <input type="email" id="email" class="inputok" name="email" placeholder="minta@gmail.com">
+            <br>
+            <label for="password">Jelszó:</label>
+            <br>
+            <input type="password" id="password" name="password" class="inputok" placeholder="minta123">
+            <br>
+            <label for="password-again">Jelszó megerősítés:</label>
+            <br>
+            <input type="password" id="password-again" class="inputok" name="password-again" placeholder="minta123">
         </div>
     </div>
-    <script>
-        function ellenorzes() {
-            const email = document.getElementById('email').value.trim();
-            const pass1 = document.getElementById('password').value;
-            const pass2 = document.getElementById('password-again').value;
-
-            const emailHiba = document.getElementById('emailHiba');
-            const passwordHiba = document.getElementById('passwordHiba');
-            const passwordAgainHiba = document.getElementById('passwordAgainHiba');
-
-            let helyes = true;
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,3}$/;
-            if (!emailRegex.test(email)) {
-                emailHiba.textContent = "Érvénytelen e-mail cím!";
-                helyes = false;
-            } else {
-                emailHiba.textContent = "";
-            }
-
-            if (pass1.length === 0) {
-                passwordHiba.textContent = "A jelszó nem lehet üres!";
-                helyes = false;
-            } else {
-                passwordHiba.textContent = "";
-            }
-
-            if (pass1 !== pass2) {
-                passwordAgainHiba.textContent = "A jelszavak nem egyeznek!";
-                helyes = false;
-            } else {
-                passwordAgainHiba.textContent = "";
-            }
-
-            if (helyes) {
-                alert("Sikeres regisztráció!");
-                document.getElementById('email').value = "";
-                document.getElementById('password').value = "";
-                document.getElementById('password-again').value = "";
-            }
-        }
-    </script>
 </body>
 </html>
