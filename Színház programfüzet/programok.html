@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="mainDiv">
+        <h1>Színház programfüzet</h1>
+
+        <h3>Előadás címe:</h3>
+        <input type="text" id="cim" placeholder="Előadás címe" required><br>
+        <h3>Előadás dátuma:</h3>
+        <input type="date" id="datum" required><br>
+        <h3>Előadás helyszíne:</h3>
+        <input type="text" id="helyszin" placeholder="Helyszín"required><br><br>
+        <button onclick="hozzaad()" id="mainBtn">Hozzáadás</button>
+        <button onclick="modosit()" id="mainBtn">Módosítás</button>
+
+        <h3>Programok</h3>
+        <ul id="lista"></ul>
+    </div>
+    <script>
+        let programFuzet = [];
+        let kivalasztottId = null;
+
+        function megjelenit() {
+            let lista = document.getElementById("lista");
+            lista.innerHTML = "";
+            programFuzet.forEach(eloadas => {
+                let li = document.createElement("li");
+                li.innerHTML = `
+                    <b>${eloadas.cim}</b> – ${eloadas.datum} – ${eloadas.helyszin}
+                    <button onclick="kivalaszt(${eloadas.id})" id="changeBtn">Szerkeszt</button>
+                    <button onclick="torol(${eloadas.id})" id="deleteBtn">Töröl</button>
+                `;
+                lista.appendChild(li);
+            });
+        }
+
+        function hozzaad() {
+            if (kivalasztottId !== null) {
+                alert("Szerkesztés közben nem lehet új programot hozzáadni!");
+                return;
+            }
+
+            let cim = document.getElementById("cim").value;
+            let datum = document.getElementById("datum").value;
+            let helyszin = document.getElementById("helyszin").value;
+
+            if (cim === "" || datum === "" || helyszin === "") {
+                alert("Minden mezőt ki kell tölteni!");
+                return;
+            }
+
+            let ujEloadas = {
+                id: Date.now(),
+                cim,
+                datum,
+                helyszin
+            };
+
+            programFuzet.push(ujEloadas);
+            megjelenit();
+            urlapTorol();
+        }
+
+
+        function kivalaszt(id) {
+            let eloadas = programFuzet.find(e => e.id === id);
+            document.getElementById("cim").value = eloadas.cim;
+            document.getElementById("datum").value = eloadas.datum;
+            document.getElementById("helyszin").value = eloadas.helyszin;
+            kivalasztottId = id;
+        }
+
+        function modosit() {
+            if (kivalasztottId === null) {
+                alert("Először válassz ki egy programot a módosításhoz!");
+                return;
+            }
+            const cim = document.getElementById("cim").value.trim();
+            const datum = document.getElementById("datum").value;
+            const helyszin = document.getElementById("helyszin").value.trim();
+
+            if (cim === "" || datum === "" || helyszin === "") {
+                alert("Minden mezőt ki kell tölteni!");
+                return;
+            }
+            let eloadas = programFuzet.find(e => e.id === kivalasztottId);
+            eloadas.cim = cim;
+            eloadas.datum = datum;
+            eloadas.helyszin = helyszin;
+            megjelenit();
+            urlapTorol();
+        }
+
+        function torol(id) {
+            programFuzet = programFuzet.filter(e => e.id !== id);
+            megjelenit();
+        }
+
+        function urlapTorol() {
+            document.getElementById("cim").value = "";
+            document.getElementById("datum").value = "";
+            document.getElementById("helyszin").value = "";
+            kivalasztottId = null;
+        }
+        megjelenit();
+    </script>  
+</body>
+</html>
