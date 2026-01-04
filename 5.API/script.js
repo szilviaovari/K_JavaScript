@@ -7,6 +7,7 @@ function fetching(id){
                 alert("Nincs ilyen sorszámú felhasználó!");
                 return;
             }
+            console.log(talalat);
             megjelenites(talalat);
         })
         .catch(error => console.error(error));
@@ -26,4 +27,5 @@ function kereses(){
         return;
     }
     fetching(id);
+
 }
