@@ -24,7 +24,7 @@
     </div>
     <script>
         let programFuzet = [];
-        let kivalasztottId = null;
+        let kivalasztottElem = null;
 
         function megjelenit() {
             let lista = document.getElementById("lista");
@@ -33,15 +33,15 @@
                 let li = document.createElement("li");
                 li.innerHTML = `
                     <b>${eloadas.cim}</b> – ${eloadas.datum} – ${eloadas.helyszin}
-                    <button onclick="kivalaszt(${eloadas.id})" id="changeBtn">Szerkeszt</button>
-                    <button onclick="torol(${eloadas.id})" id="deleteBtn">Töröl</button>
+                    <button onclick="kivalaszt(${eloadas.elem})" id="changeBtn">Szerkeszt</button>
+                    <button onclick="torol(${eloadas.elem})" id="deleteBtn">Töröl</button>
                 `;
                 lista.appendChild(li);
             });
         }
 
         function hozzaad() {
-            if (kivalasztottId !== null) {
+            if (kivalasztottElem !== null) {
                 alert("Szerkesztés közben nem lehet új programot hozzáadni!");
                 return;
             }
@@ -56,7 +56,7 @@
             }
 
             let ujEloadas = {
-                id: Date.now(),
+                elem: Date.now(),
                 cim,
                 datum,
                 helyszin
@@ -68,16 +68,16 @@
         }
 
 
-        function kivalaszt(id) {
-            let eloadas = programFuzet.find(e => e.id === id);
+        function kivalaszt(elem) {
+            let eloadas = programFuzet.find(e => e.elem === elem);
             document.getElementById("cim").value = eloadas.cim;
             document.getElementById("datum").value = eloadas.datum;
             document.getElementById("helyszin").value = eloadas.helyszin;
-            kivalasztottId = id;
+            kivalasztottElem = elem;
         }
 
         function modosit() {
-            if (kivalasztottId === null) {
+            if (kivalasztottElem === null) {
                 alert("Először válassz ki egy programot a módosításhoz!");
                 return;
             }
@@ -89,7 +89,7 @@
                 alert("Minden mezőt ki kell tölteni!");
                 return;
             }
-            let eloadas = programFuzet.find(e => e.id === kivalasztottId);
+            let eloadas = programFuzet.find(e => e.elem === kivalasztottElem);
             eloadas.cim = cim;
             eloadas.datum = datum;
             eloadas.helyszin = helyszin;
@@ -97,8 +97,8 @@
             urlapTorol();
         }
 
-        function torol(id) {
-            programFuzet = programFuzet.filter(e => e.id !== id);
+        function torol(elem) {
+            programFuzet = programFuzet.filter(e => e.elem !== elem);
             megjelenit();
         }
 
@@ -106,7 +106,7 @@
             document.getElementById("cim").value = "";
             document.getElementById("datum").value = "";
             document.getElementById("helyszin").value = "";
-            kivalasztottId = null;
+            kivalasztottElem = null;
         }
         megjelenit();
     </script>  
