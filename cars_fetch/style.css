@@ -1,0 +1,87 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+#cars-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.car-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 4px;
+    width: calc(33% - 1rem);
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.car-card:hover {
+    background-color: #f9f9f9;
+}
+
+#message {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #ffdddd;
+    color: #d8000c;
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid #d8000c;
+}
+
+@media (max-width: 768px) {
+    .car-card {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .car-card {
+        width: 100%;
+    }
+}
