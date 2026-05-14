@@ -1,54 +1,45 @@
-import express from "express";
+import express, { json } from "express";
+import * as db from "./data/db.js";
 
-const PORT = 3030;
+const PORT = 3080;
 const app = express();
 
 app.use(express.json());
-const students = [
-  { id: 1, name: "Ann", subject: "maths" },
-  { id: 2, name: "Bob", subject: "IT" },
-  { id: 3, name: "Cloe", subject: "PE" },
-];
 
-app.get("/students", (req, res) => {
-  res.status(200).json(students);
+app.get("/posts", (req,res) =>{
+    const posts = db.getAllPosts();
+    res.status(200).json(posts);
 });
 
-app.get("/students/:id", (req, res) => {
-  const id = +req.params.id;
-  const student = students.find((x) => x.id === id);
-  if (!student) {
-    return res.status(404).json({ message: "Student not found" });
-  }
-  res.status(200).json(student);
-});
+app.get("/posts/:id", (req,res) => {
+    const id = +req.params.id;
+    const post = db.getPostById(id);
+    if(!post)
+    {
+        return res.status(404).json({message: "Poszt nem található"});
+    }
+    res.status(200).json(post);
+})
 
-app.post("/students/", (req, res) => {
-  const { name, subject } = req.body;
-  if (!name || !subject) {
-    return res.status(400).json({ message: "Name and subject are required" });
-  }
-  const newId = students[students.length - 1]?.id + 1;
-  const student = { id: newId, name, subject };
-  students.push(student);
-  res.status(201).json(student);
-});
+app.post("/posts", (req,res) => {
+    const {title,content} = req.body;
+    if((!title) || (!content))
+    {
+        return res.status(400).json({message: "Poszt adat hiány"});
+    }
+    const saved = db.savePost(title,content);
+    res.status(201).json({id: saved.lastInsertRowId, title, content});
+})
 
-app.put("/students/:id", (req, res) => {
-  const id = +req.params.id;
-  const student = students.find((x) => x.id === id);
-  if (!student) {
-    return res.status(404).json({ message: "Student not found" });
-  }
-  const { name, subject } = req.body;
-  if (!name || !subject) {
-    return res.status(400).json({ message: "Name and subject are required" });
-  }
-  student.name = name;
-  student.subject = subject;
-  res.status(200).json(student);
-});
+app.delete("/posts/:id", (req,res) => {
+    const id = +req.params.id;
+    const post = db.getPostById(id);
+    if(!post)
+    {
+        return res.status(404).json({message: "Poszt nem található"});
+    }
+    db.deletePost(id);
+    res.status(204).json("No content");
+})
 
-app.listen(PORT, () => {
-  console.log(`Server runs on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server runs on ${PORT}`));

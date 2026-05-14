@@ -1,5 +1,5 @@
 {
-  "name": "diakok",
+  "name": "sqlite-doga",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^12.10.0",
     "express": "^5.2.1"
   },
   "devDependencies": {
